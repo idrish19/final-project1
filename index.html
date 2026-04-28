@@ -8,13 +8,13 @@
             --primary-blue: #00d2ff;
             --secondary-purple: #9d50bb;
             --dark-bg: #0f172a;
-            --text-gray: #94a3b8;
+            --sidebar-bg: #1e293b;
         }
 
         body {
             margin: 0;
             padding: 0;
-            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            font-family: 'Segoe UI', Roboto, sans-serif;
             background-color: var(--dark-bg);
             color: white;
             display: flex;
@@ -24,7 +24,7 @@
             overflow: hidden;
         }
 
-        /* Animated Background Gradient */
+        /* Background Effect */
         .bg-glow {
             position: absolute;
             width: 100%;
@@ -33,34 +33,29 @@
             z-index: -1;
         }
 
-        /* Floating Animation */
+        /* --- THE MISSING FLOATING ANIMATION --- */
         @keyframes float {
             0% { transform: translateY(0px); }
             50% { transform: translateY(-20px); }
             100% { transform: translateY(0px); }
         }
 
-        @keyframes fadeIn {
-            from { opacity: 0; transform: scale(0.9); }
-            to { opacity: 1; transform: scale(1); }
-        }
-
-        .container {
-            text-align: center;
-            animation: fadeIn 1.5s ease-out;
-            padding: 2rem;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 20px;
-            background: rgba(30, 41, 59, 0.5);
-            backdrop-filter: blur(10px);
-            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
-        }
-
         .devops-icon {
             font-size: 3rem;
             margin-bottom: 1rem;
-            animation: float 4s ease-in-out infinite;
+            animation: float 4s ease-in-out infinite; /* This makes it move! */
             display: inline-block;
+        }
+
+        /* Main Container */
+        .container {
+            text-align: center;
+            padding: 2.5rem;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            background: rgba(30, 41, 59, 0.5);
+            backdrop-filter: blur(12px);
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
         }
 
         h1 {
@@ -87,50 +82,91 @@
             margin-bottom: 30px;
         }
 
-        /* Tech Tags (DevOps/Cloud Stuff) */
-        .tech-stack {
-            display: flex;
-            gap: 10px;
-            justify-content: center;
-            flex-wrap: wrap;
-            margin-top: 20px;
+        /* --- SIDEBAR STYLES --- */
+        #sidebar {
+            position: fixed;
+            right: -350px;
+            top: 0;
+            width: 300px;
+            height: 100%;
+            background: var(--sidebar-bg);
+            box-shadow: -5px 0 15px rgba(0,0,0,0.5);
+            transition: 0.4s;
+            padding: 25px;
+            z-index: 1000;
+            border-left: 2px solid var(--primary-blue);
         }
 
-        .tag {
-            background: rgba(0, 210, 255, 0.1);
-            border: 1px solid var(--primary-blue);
-            color: var(--primary-blue);
-            padding: 5px 15px;
-            border-radius: 50px;
-            font-size: 0.8rem;
-            font-family: monospace;
+        #sidebar.active {
+            right: 0;
+        }
+
+        .toggle-btn {
+            position: fixed;
+            right: 20px;
+            top: 20px;
+            background: var(--primary-blue);
+            color: var(--dark-bg);
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+            z-index: 1001;
             transition: 0.3s;
         }
 
-        .tag:hover {
-            background: var(--primary-blue);
-            color: var(--dark-bg);
-            cursor: default;
+        .step-item {
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            animation: fadeInRight 0.5s ease forwards;
+            opacity: 0;
         }
+
+        @keyframes fadeInRight {
+            from { opacity: 0; transform: translateX(20px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+
+        .step-item:nth-child(1) { animation-delay: 0.2s; }
+        .step-item:nth-child(2) { animation-delay: 0.4s; }
+        .step-item:nth-child(3) { animation-delay: 0.6s; }
+        .step-item:nth-child(4) { animation-delay: 0.8s; }
+        .step-item:nth-child(5) { animation-delay: 1.0s; }
     </style>
 </head>
 <body>
     <div class="bg-glow"></div>
     
+    <button class="toggle-btn" onclick="toggleSidebar()">☰ PROJECT STEPS</button>
+
+    <div id="sidebar">
+        <h3 style="color: white; border-bottom: 2px solid var(--secondary-purple); padding-bottom: 10px;">My DevOps Journey</h3>
+        <div class="step-list">
+            <div class="step-item"><h4>1. Environment Setup</h4><p>Initialized AWS & GitHub handshake.</p></div>
+            <div class="step-item"><h4>2. Pipeline Creation</h4><p>Built automated AWS CodePipeline.</p></div>
+            <div class="step-item"><h4>3. Local Development</h4><p>Configured Git in CloudShell.</p></div>
+            <div class="step-item"><h4>4. Pushing Code</h4><p>Pushed via Token to GitHub.</p></div>
+            <div class="step-item"><h4>5. Deployment</h4><p>Deployed live to Elastic Beanstalk.</p></div>
+        </div>
+        <button onclick="toggleSidebar()" style="background: none; border: 1px solid white; color: white; cursor: pointer; margin-top: 20px; padding: 5px 10px;">Close</button>
+    </div>
+
     <div class="container">
-        <div class="devops-icon">☁️ ⚙️ 🚀</div>
+        <div class="devops-icon">☁️ ⚙️ 🚀</div> 
         <h1>Welcome to My Project</h1>
         <div class="college-name">Governor State University</div>
         <div class="course-name">Cloud Integrity Assurance</div>
-        
-        <div class="tech-stack">
-            <span class="tag">#AWS</span>
-            <span class="tag">#DevOps</span>
-            <span class="tag">#CICD</span>
-            <span class="tag">#CloudShell</span>
-            <span class="tag">#ElasticBeanstalk</span>
-            <span class="tag">#Terraform</span>
-        </div>
+        <p style="color: #94a3b8; max-width: 500px; margin: 20px auto;">
+            A full CI/CD pipeline from CloudShell to Elastic Beanstalk.
+        </p>
     </div>
+
+    <script>
+        function toggleSidebar() {
+            document.getElementById('sidebar').classList.toggle('active');
+        }
+    </script>
 </body>
 </html>

@@ -33,7 +33,7 @@
             z-index: -1;
         }
 
-        /* --- THE MISSING FLOATING ANIMATION --- */
+        /* Floating Icon Animation */
         @keyframes float {
             0% { transform: translateY(0px); }
             50% { transform: translateY(-20px); }
@@ -43,8 +43,14 @@
         .devops-icon {
             font-size: 3rem;
             margin-bottom: 1rem;
-            animation: float 4s ease-in-out infinite; /* This makes it move! */
+            animation: float 4s ease-in-out infinite;
             display: inline-block;
+        }
+
+        /* Sidebar Fade-In Animation */
+        @keyframes fadeInRight {
+            from { opacity: 0; transform: translateX(20px); }
+            to { opacity: 1; transform: translateX(0); }
         }
 
         /* Main Container */
@@ -124,11 +130,10 @@
             opacity: 0;
         }
 
-        @keyframes fadeInRight {
-            from { opacity: 0; transform: translateX(20px); }
-            to { opacity: 1; transform: translateX(0); }
-        }
+        .step-item h4 { margin: 0 0 5px 0; color: var(--primary-blue); }
+        .step-item p { margin: 0; font-size: 0.85rem; color: #cbd5e1; }
 
+        /* Staggered animation delays for the list items */
         .step-item:nth-child(1) { animation-delay: 0.2s; }
         .step-item:nth-child(2) { animation-delay: 0.4s; }
         .step-item:nth-child(3) { animation-delay: 0.6s; }
@@ -144,22 +149,38 @@
     <div id="sidebar">
         <h3 style="color: white; border-bottom: 2px solid var(--secondary-purple); padding-bottom: 10px;">My DevOps Journey</h3>
         <div class="step-list">
-            <div class="step-item"><h4>1. Environment Setup</h4><p>Initialized AWS & GitHub handshake.</p></div>
-            <div class="step-item"><h4>2. Pipeline Creation</h4><p>Built automated AWS CodePipeline.</p></div>
-            <div class="step-item"><h4>3. Local Development</h4><p>Configured Git in CloudShell.</p></div>
-            <div class="step-item"><h4>4. Pushing Code</h4><p>Pushed via Token to GitHub.</p></div>
-            <div class="step-item"><h4>5. Deployment</h4><p>Deployed live to Elastic Beanstalk.</p></div>
+            <div class="step-item">
+                <h4>1. Environment Setup</h4>
+                <p>Created AWS environment and established connection with GitHub repository.</p>
+            </div>
+            <div class="step-item">
+                <h4>2. Pipeline Creation</h4>
+                <p>Configured AWS CodePipeline to automate deployments from GitHub.</p>
+            </div>
+            <div class="step-item">
+                <h4>3. Local Development</h4>
+                <p>Prepared Node.js files in AWS CloudShell.</p>
+            </div>
+            <div class="step-item">
+                <h4>4. Pushing Code</h4>
+                <p>Used Git commands and Personal Access Tokens to push to the repository.</p>
+            </div>
+            <div class="step-item">
+                <h4>5. Deployment</h4>
+                <p>Deployed application live on AWS Elastic Beanstalk.</p>
+            </div>
         </div>
         <button onclick="toggleSidebar()" style="background: none; border: 1px solid white; color: white; cursor: pointer; margin-top: 20px; padding: 5px 10px;">Close</button>
     </div>
 
     <div class="container">
-        <div class="devops-icon">☁️ ⚙️ 🚀</div> 
+        <div class="devops-icon">☁️ ⚙️ 🚀</div>
         <h1>Welcome to My Project</h1>
         <div class="college-name">Governor State University</div>
         <div class="course-name">Cloud Integrity Assurance</div>
+        
         <p style="color: #94a3b8; max-width: 500px; margin: 20px auto;">
-            A full CI/CD pipeline from CloudShell to Elastic Beanstalk.
+            This project demonstrates a full CI/CD pipeline from AWS CloudShell to Elastic Beanstalk.
         </p>
     </div>
 
